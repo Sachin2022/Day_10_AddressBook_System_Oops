@@ -20,7 +20,7 @@ public class AddressBookMainClass {
 	public void addContacts() {
 
 		System.out.println("Enter your choice");
-		System.out.println("1 : Add new contact    2 : Edit contact ");
+		System.out.println("1 :Add new contact    2 :Edit contact  3 :Delete contact");
 		int choice = sc.nextInt();
 		switch (choice) {
 		case 1:
@@ -57,13 +57,21 @@ public class AddressBookMainClass {
 			break;
 		case 2:
 			System.out.println("Enter the name of user to Edit");
-			String nameToEdit = sc.next();			 
+			String nameToEdit = sc.next();
 			addressbooks.editContact(nameToEdit);
 			addressbooks.addContacts();
+
+		case 3:
+			System.out.println("Enter the person Name");
+			String deletename = sc.next();
+			addressbooks.deleteContactDetails(deletename);
+			addressbooks.addContacts();
+			break;
+		default:
+			System.out.println("Please Enter correct choice");
 		}
 
 	}
- 
 
 	public void editContact(String name) {
 		List<Contact> contactDetails = addressbook.getContacts();
@@ -80,34 +88,34 @@ public class AddressBookMainClass {
 					System.out.println("Enter the First Name");
 					String firstName = sc.next();
 					contactperson.setFirstName(firstName);
-					 
+
 					break;
 				case 2:
 					System.out.println("Enter the Last Name");
 					String lastName = sc.next();
 					contactperson.setLastName(lastName);
-									 
+
 					break;
 				case 3:
 					System.out.println("Enter The Address");
 					String address = sc.next();
-					contactperson.setAddress(address);				
-					 
+					contactperson.setAddress(address);
+
 					break;
 				case 4:
 					System.out.println("Enter the city");
 					String city = sc.next();
-					contactperson.setCity(city);					 
+					contactperson.setCity(city);
 					break;
 				case 5:
 					System.out.println("Enter the state");
-					String state = sc.next();				
-					contactperson.setState(state);				
+					String state = sc.next();
+					contactperson.setState(state);
 					break;
 				case 6:
 					System.out.println("Enter the zip Code");
 					int zip = sc.nextInt();
-					contactperson.setZip(zip);			 
+					contactperson.setZip(zip);
 					break;
 				case 7:
 					System.out.println("Enter the Phone number");
@@ -142,6 +150,19 @@ public class AddressBookMainClass {
 				System.out.println("No Conatct Details available :");
 			}
 		}
+	}
+
+	public void deleteContactDetails(String name) {
+		List<Contact> contactDetails = addressbook.getContacts();
+		for (int i = 0; i <= contactDetails.size() - 1; i++) {
+			Contact contactperson = contactDetails.get(i);
+			if (contactperson.getFirstName().equals(name)) {
+				contactDetails.remove(i);
+				addressbook.setContacts(contactDetails);
+			}
+		}
+		System.out.println("Contact deleted Successfully");
+		addressbooks.displayContacts(addressbook);
 	}
 
 }
