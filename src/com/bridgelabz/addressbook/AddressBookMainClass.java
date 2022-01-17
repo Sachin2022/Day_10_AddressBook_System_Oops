@@ -224,7 +224,5 @@ public class AddressBookMainClass {
 
 		addressbooks.displayContacts(addressbook);
 		addressbooks.addContacts();
-
 	}
-
 }
